@@ -28,6 +28,7 @@ def get_login_details():
     conn.close()
     return (logged_in, first_name, no_of_items)
 
+@app.route("/")
 def root():
     logged_in, first_name, no_of_items = get_login_details()
     with sqlite3.connect('database.db') as conn:
@@ -38,11 +39,7 @@ def root():
         cur.execute('SELECT productId, name, price, description, image, stock FROM products')
         item_data = cur.fetchall()
         # Show an error instead of the categories
-
         #category_data = [(-1,"Error")]
-
-        # category_data = [(-1,"Error")]
-
         # Show all categories
         cur.execute('SELECT categoryId, name FROM categories')
         category_data = cur.fetchall()
